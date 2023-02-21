@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>quize app</title>
+  </head>
+
+  <style>
+    * {
+      margin: 0px;
+      padding: 0px;
+    }
+
+    body {
+      width: 100vh;
+      height: 100vh;
+    }
+    .main-div {
+      width: 35vw;
+      height: 410px;
+      background-color: rgb(206, 173, 112);
+      position: relative;
+      top: 50px;
+    }
+    img {
+      width: 900px;
+      height: 600px;
+    }
+
+    ul {
+      height: 130px;
+    }
+    .inner-div {
+      width: 35vw;
+      height: 410px;
+      background-color: aliceblue;
+      align-items: center;
+      border-radius: 10px;
+      position: absolute;
+      top: 140px;
+      left: 550px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 18px;
+      margin: 20px;
+      height: 90px;
+      word-spacing: 5px;
+    }
+
+    li {
+      list-style-type: none;
+      padding: 2px;
+      position: relative;
+      top: 20px;
+      font-size: 15px;
+      left: 20px;
+    }
+
+    input {
+      cursor: pointer;
+    }
+    button {
+      text-align: center;
+
+      width: 100px;
+      height: 35px;
+      font-size: 15px;
+      position: relative;
+      top: 30px;
+      left: 80px;
+
+      border-style: none;
+      background-color: rgb(45, 163, 237);
+
+      border-radius: 32px solid gray;
+    }
+
+    button:hover {
+      background-color: rgb(72, 72, 230);
+      color: whitesmoke;
+    }
+
+    #showscore {
+      background-color: rgb(201, 108, 108);
+      width: 35vw;
+      height: 90px;
+      text-align: center;
+      position: relative;
+      top: 40px;
+
+      border-radius: 0px 0px 10px 10px;
+    }
+    #showscore h3 {
+      position: relative;
+      left: 80px;
+      top: 8px;
+      display: grid;
+      text-align: center;
+      grid-template-columns: max-content;
+    }
+
+    #showscore .btn {
+      background-color: rgb(97, 148, 97);
+
+      position: relative;
+      left: 80px;
+    }
+    @media screen and (min-width: 480px) {
+      .btn {
+        width: 150px;
+        float: left;
+      }
+    }
+  </style>
+  <body>
+    <div class="main-div">
+      <div class="left">
+        <img src="./img2.png" alt="" />
+      </div>
+      <div class="inner-div">
+        <h1 class="question">questions</h1>
+        <ul>
+          <li>
+            <input type="radio" name="answer" id="ans1" class="answer" />
+            <label for="ans1" id="option1">Answer</label>
+          </li>
+
+          <li>
+            <input type="radio" name="answer" id="ans2" class="answer" />
+            <label for="ans1" id="option2">Answer</label>
+          </li>
+          <li>
+            <input type="radio" name="answer" id="ans3" class="answer" />
+            <label for="ans1" id="option3">Answer</label>
+          </li>
+          <li>
+            <input type="radio" name="answer" id="ans4" class="answer" />
+            <label for="ans1" id="option4">Answer</label>
+          </li>
+        </ul>
+
+        <button id="submit">Submit</button>
+        <div id="showscore" class="scoreArea"></div>
+      </div>
+    </div>
+
+    <script>
+      const quizeDB = [
+        {
+          question:
+            " Which one of the following is an application of Stack Data Structure?",
+          a: "Managing function calls",
+          b: "The stock span problem",
+          c: "Arithmetic expression evaluation",
+          d: "All of the above",
+          ans: "ans4",
+        },
+
+        {
+          question:
+            "Which one of the following is an application of Queue Data Structure?",
+          a: "When a resource is shared among multiple consumers",
+          b: "When data is transferred asynchronouslybetween two processes",
+          c: "Load Balancing",
+          d: "All of the above",
+          ans: "ans4",
+        },
+        {
+          question:
+            "Which of the following sorting algorithms can be used to sort a random linked list with minimum time complexity?",
+          a: "Insertion Sort",
+          b: "Quick Sort",
+          c: "Heap Sort",
+          d: "Merge Sort",
+          ans: "ans4",
+        },
+
+        {
+          question: "How many types of array",
+          a: "two",
+          b: "three",
+          c: "four",
+          d: "fifth",
+          ans: "ans1",
+        },
+
+        {
+          question: " How many types nodes are present in binary tree",
+          a: "two",
+          b: "three",
+          c: "four",
+          d: "fifth",
+          ans: "ans1",
+        },
+      ];
+
+      const question = document.querySelector(".question");
+
+      const Option1 = document.querySelector("#option1");
+      const Option2 = document.querySelector("#option2");
+      const Option3 = document.querySelector("#option3");
+      const Option4 = document.querySelector("#option4");
+      const button = document.querySelector("#submit");
+
+      const answers = document.querySelectorAll(".answer");
+
+      const showscore = document.querySelector("#showscore");
+      let count = 0;
+
+      let score = 0;
+      const loadquestions = () => {
+        let tic = quizeDB[count];
+        question.innerText = tic.question;
+
+        Option1.innerText = tic.a;
+        Option2.innerText = tic.b;
+        Option3.innerText = tic.c;
+        Option4.innerText = tic.d;
+      };
+
+      loadquestions();
+
+      const getCheckAnswer = () => {
+        let answer;
+        answers.forEach((currAnsElem) => {
+          if (currAnsElem.checked) {
+            answer = currAnsElem.id;
+          }
+        });
+        return answer;
+      };
+
+      const deselectall = () => {
+        answers.forEach((currAnsElem) => (currAnsElem.checked = false));
+      };
+      submit.addEventListener("click", () => {
+        const checkedAnswer = getCheckAnswer();
+        console.log(checkedAnswer);
+
+        if (checkedAnswer == quizeDB[count].ans) {
+          score++;
+        }
+
+        count++;
+
+        deselectall();
+        if (count < quizeDB.length) {
+          loadquestions();
+        } else {
+          showscore.innerHTML = `<h3>You scored ${score}/${quizeDB.length} 👍</h3>
+         
+         <button class="btn"  onclick = "location.reload()"> Play again</button>`;
+        }
+      });
+    </script>
+  </body>
+</html>

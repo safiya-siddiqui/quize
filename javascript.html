@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    * {
+      margin: 0px;
+      padding: 0px;
+      box-sizing: border-box;
+    }
+    button {
+      width: 200px;
+      height: 150px;
+      background-color: rgb(248, 248, 126);
+      position: relative;
+      top: 200px;
+      left: 500px;
+    }
+    #popupbox {
+      width: 300px;
+      height: 300px;
+
+      position: relative;
+      top: 300px;
+      left: 500px;
+    }
+  </style>
+  <body>
+    <button class="submit" onclick="pop()">Click</button>
+    <div id="popupbox" style="border: 2px solid red">hello mahi</div>
+
+    <script>
+      const pop = () => {
+        const box = document
+          .getElementById("popupbox")
+          .alert("hello i am safiya siddiqui");
+      };
+    </script>
+  </body>
+</html>
